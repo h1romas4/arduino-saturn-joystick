@@ -9,7 +9,7 @@
 // PORTB D11 D10 D9 D8 MISO MOSI SCLK TX_LED
 #define S0 8
 #define S1 9
-// PIND 32U4 D6 D12 RX D4 D1 D0 D2 D3
+// PIND D6 D12 RX D4 D1 D0 D2 D3
 #define Y0 2
 #define Y1 3
 #define Y2 4
@@ -59,21 +59,23 @@ void scanKeys(void)
     uint8_t currentButtonState[3][4];
     uint8_t currentHatState;
     for(int i = 0; i < 4; i++) {
+        // set read page
         PORTB = page[i];
-        uint8_t currentButton = PIND;
+        // read current level
+        uint8_t current = PIND;
         if(i < 3) {
             // buttons
-            currentButtonState[i][0] = (currentButton >> 7) & B00000001; // D3
-            currentButtonState[i][1] = (currentButton >> 4) & B00000001; // D2
-            currentButtonState[i][2] = (currentButton >> 0) & B00000001; // D1
-            currentButtonState[i][3] = (currentButton >> 1) & B00000001; // D0
+            currentButtonState[i][0] = (current >> 7) & B00000001; // D3
+            currentButtonState[i][1] = (current >> 4) & B00000001; // D2
+            currentButtonState[i][2] = (current >> 0) & B00000001; // D1
+            currentButtonState[i][3] = (current >> 1) & B00000001; // D0
         } else {
             // hat switch
             currentHatState = 
-                ((currentButton & B00000010) << 2) | // D0 Up
-                ((currentButton & B10000000) >> 5) | // D3 Rt
-                ((currentButton & B00000001) << 1) | // D1 Dn
-                ((currentButton & B00010000) >> 4);  // D2 Lt
+                ((current & B00000010) << 2) | // D0 Up
+                ((current & B10000000) >> 5) | // D3 Rt
+                ((current & B00000001) << 1) | // D1 Dn
+                ((current & B00010000) >> 4);  // D2 Lt
         }
     }
 
