@@ -18,7 +18,7 @@ Saturn             Arduiono Pro Micro
 3 - D0  - black    D2
 4 - S0  - orange   D8
 5 - S1  - red      D9
-6 - VCC - brown    5V
+6 - VCC - brown    -
 7 - D3  - yellow   D6
 8 - D2  - gray     D4
 9 - GND - white    GND
