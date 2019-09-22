@@ -22,9 +22,10 @@ jobs:
         cd ArduinoJoystickLibrary
         git checkout 10eda40beecf1b1b632551ba6378a169832aec17
         cp -Rfp Joystick/ ../
-        # TODO: set ide version in arduino-builder
+        # TODO: set ide env in arduino-builder
         cd ../Joystick/src
         sed -i '1i#define ARDUINO 10805' Joystick.h
+        sed -i '1i#define USBCON true' Joystick.h
 
     - name: Build Sketches
       uses: Legion2/arduino-builder-action@v2.0.0
