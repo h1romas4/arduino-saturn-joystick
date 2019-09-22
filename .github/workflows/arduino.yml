@@ -1,0 +1,30 @@
+name: Arduino CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    
+    - name: Download TimerOne
+      uses: Legion2/download-release-action@v2.0.0
+      with:
+        repository: PaulStoffregen/TimerOne
+        tag: '1.1'
+        path: libraries
+        file: TimerOne-1.1.tar.gz
+
+    - name: Download ArduinoJoystickLibrary
+      run: |
+        mkdir -p libraries && cd libraries
+        git clone https://github.com/MHeironimus/ArduinoJoystickLibrary.git
+        cd ArduinoJoystickLibrary
+        git checkout 10eda40beecf1b1b632551ba6378a169832aec17
+
+    - name: Build Sketches
+      uses: Legion2/arduino-builder-action@v2.0.0
+      with:
+        sketchDirectory: ./
+        board: "arduino:avr:uno"
