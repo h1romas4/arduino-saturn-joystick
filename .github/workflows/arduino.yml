@@ -21,9 +21,11 @@ jobs:
         git clone https://github.com/MHeironimus/ArduinoJoystickLibrary.git
         cd ArduinoJoystickLibrary
         git checkout 10eda40beecf1b1b632551ba6378a169832aec17
+        cp -Rfp Joystick/ ../
 
     - name: Build Sketches
       uses: Legion2/arduino-builder-action@v2.0.0
       with:
         sketchDirectory: ./
+        libraries: "libraries"
         board: "arduino:avr:uno"
