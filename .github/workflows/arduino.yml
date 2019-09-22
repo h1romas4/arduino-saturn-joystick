@@ -9,12 +9,11 @@ jobs:
     - uses: actions/checkout@v1
     
     - name: Download TimerOne
-      uses: Legion2/download-release-action@v2.0.0
-      with:
-        repository: PaulStoffregen/TimerOne
-        tag: '1.1'
-        path: libraries
-        file: TimerOne-1.1.tar.gz
+      run: |
+        mkdir -p libraries && cd libraries
+        git clone https://github.com/PaulStoffregen/TimerOne.git
+        cd TimerOne
+        git checkout 0f2d2d9895648ecdfed3c890c03684bf0c245cf7
 
     - name: Download ArduinoJoystickLibrary
       run: |
