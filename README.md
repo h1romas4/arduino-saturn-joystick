@@ -12,7 +12,7 @@ Install from Arduino library manager.
 ## Connection
 
 ```
-Saturn             Arduiono Pro Micro
+Saturn Controller  Arduiono Pro Micro
 1 - VCC - blue     5V
 2 - D1  - green    D3
 3 - D0  - black    D2
